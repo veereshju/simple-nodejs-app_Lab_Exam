@@ -20,6 +20,10 @@ test:
 lint:
 	$(NPM) run lint
 
+lint-fix:
+    npm run lint-fix
+
+
 # Build the application (if you need to create a build process)
 build:
 	$(NPM) run build
