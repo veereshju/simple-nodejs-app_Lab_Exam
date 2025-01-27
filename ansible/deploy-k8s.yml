@@ -1,0 +1,10 @@
+---
+- name: Deploy Node.js App on Kubernetes
+  hosts: localhost
+  tasks:
+    - name: Apply Deployment
+      command: kubectl apply -f ../Deployment.yml
+
+    - name: Apply Service
+      command: kubectl apply -f ../service.yml
+
