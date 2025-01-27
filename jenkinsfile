@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    environment {
+        DOCKER_IMAGE = 'simple-nodejs-app:latest'
+    }
+    stages {
+        stage('Clone Repository') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $DOCKER_IMAGE .'
+            }
+        }
+        stage('Run Ansible Deployment (VM)') {
+            steps {
+                sh 'ansible-playbook -i ansible/hosts.ini ansible/deploy-vm.yml'
+            }
+        }
+        stage('Run Ansible Deployment (Docker)') {
+            steps {
+                sh 'ansible-playbook -i ansible/hosts.ini ansible/deploy-docker.yml'
+            }
+        }
+        stage('Run Ansible Deployment (Kubernetes)') {
+            steps {
+                sh 'ansible-playbook -i ansible/hosts.ini ansible/deploy-k8s.yml'
+            }
+        }
+    }
+}
+
