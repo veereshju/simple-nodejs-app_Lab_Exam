@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: simple-nodejs-app
-        image: lavanya986/nodejswebappexam:v1  
+        image: veershju/simple-nodejs-app:latest  
         ports:
         - containerPort: 3000
