@@ -1,27 +1,28 @@
 pipeline {
     agent any
-    environment {
-        DOCKER_IMAGE = 'simple-nodejs-app:latest'
-    }
     stages {
-        stage('Clone Repository') {
-            steps {
-                checkout scm
-            }
-        }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE .'
+                sh 'docker build -t simple-nodejs-app:latest .'
             }
         }
         stage('Run Ansible Deployment (Docker)') {
             steps {
-                sh 'ansible-playbook -i ansible/hosts.ini ansible/deploy-docker.yml'
+                sh '''
+                    source /path/to/ansible-venv/bin/activate
+                    ansible-playbook -i ansible/hosts.ini ansible/deploy-docker.yml
+                '''
             }
         }
         stage('Run Ansible Deployment (Kubernetes)') {
+            when {
+                expression { currentBuild.result == null } // Run only if no previous errors
+            }
             steps {
-                sh 'ansible-playbook -i ansible/hosts.ini ansible/deploy-k8s.yml'
+                sh '''
+                    source /path/to/ansible-venv/bin/activate
+                    ansible-playbook -i ansible/hosts.ini ansible/deploy-k8s.yml
+                '''
             }
         }
     }
