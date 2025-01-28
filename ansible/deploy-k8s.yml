@@ -3,8 +3,8 @@
   hosts: localhost
   tasks:
     - name: Apply Deployment
-      command: kubectl apply -f ../Deployment.yml
+      command: kubectl apply -f /Users/veeresh/Desktop/project/simple-nodejs-app_Lab_Exam/Deployment.yml
 
     - name: Apply Service
-      command: kubectl apply -f ../service.yml
+      command: kubectl apply -f /Users/veeresh/Desktop/project/simple-nodejs-app_Lab_Exam/service.yml
 

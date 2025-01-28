@@ -2,10 +2,15 @@
 - name: Deploy Node.js App on Docker
   hosts: localhost
   tasks:
+    - name: Log in to Docker
+      community.docker.docker_login:
+        username: veershju
+        password: Veeresh@27
+
     - name: Build Docker Image
       community.docker.docker_image:
         name: simple-nodejs-app
-        path: ../
+        path: /Users/veeresh/Desktop/project/simple-nodejs-app_Lab_Exam
         tag: latest
 
     - name: Run Docker Container

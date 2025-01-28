@@ -19,3 +19,4 @@ spec:
         image: veershju/simple-nodejs-app:latest  
         ports:
         - containerPort: 3000
+
