@@ -14,11 +14,6 @@ pipeline {
                 sh 'docker build -t $DOCKER_IMAGE .'
             }
         }
-        stage('Run Ansible Deployment (VM)') {
-            steps {
-                sh 'ansible-playbook -i ansible/hosts.ini ansible/deploy-vm.yml'
-            }
-        }
         stage('Run Ansible Deployment (Docker)') {
             steps {
                 sh 'ansible-playbook -i ansible/hosts.ini ansible/deploy-docker.yml'
