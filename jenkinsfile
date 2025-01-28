@@ -12,7 +12,6 @@ pipeline {
         stage('Run Ansible Deployment (Docker)') {
             steps {
                 sh '''
-                    source /path/to/ansible-venv/bin/activate
                     ansible-playbook -i ansible/hosts.ini ansible/deploy-docker.yml
                 '''
             }
@@ -23,7 +22,6 @@ pipeline {
             }
             steps {
                 sh '''
-                    source /path/to/ansible-venv/bin/activate
                     ansible-playbook -i ansible/hosts.ini ansible/deploy-k8s.yml
                 '''
             }
